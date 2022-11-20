@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
+const TextInput = () => (
+  <input type="text" className="border p-2 rounded outline-none w-full" />
+);
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="h-screen p-[10%] py-[20%] bg-gray-100">
+        <div className="flex items-center justify-center flex-col gap-2">
+          <TextInput />
+          <TextInput />
+          <TextInput />
+          <input
+            type="submit"
+            className="border bg-blue-400 w-full"
+            value="submit"
+          />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
