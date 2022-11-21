@@ -6,7 +6,7 @@ const App = () => {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm({
     defaultValues: {
       name: "dawoon",
@@ -27,12 +27,13 @@ const App = () => {
               type="text"
               autoComplete="off"
               {...register("name", {
-                required: true,
+                required: "아이디는 필수 입력입니다.",
                 pattern: /^[A-Za-z]+$/i,
                 maxLength: 20,
                 minLength: 1,
               })}
             />
+            {errors.name?.message}
 
             <input
               className="border w-full p-1"
