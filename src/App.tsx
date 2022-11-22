@@ -1,6 +1,24 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./App.css";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
+interface IInput {
+  type: "text" | "number";
+}
+
+interface Iprops extends IInput {
+  register?: UseFormRegisterReturn;
+}
+
+const Input = forwardRef((props: Iprops, _) => {
+  return (
+    <input
+      className="border w-full p-1"
+      autoComplete="off"
+      type={props.type}
+      {...props.register}
+    />
+  );
+});
 
 const App = () => {
   const {
@@ -22,11 +40,9 @@ const App = () => {
       <div className="h-screen p-[10%] py-[20%] bg-gray-100">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex items-center justify-center flex-col gap-2">
-            <input
-              className="border w-full p-1"
+            <Input
               type="text"
-              autoComplete="off"
-              {...register("name", {
+              register={register("name", {
                 required: "아이디는 필수 입력입니다.",
                 pattern: /^[A-Za-z]+$/i,
                 maxLength: 20,
@@ -35,15 +51,14 @@ const App = () => {
             />
             {errors.name?.message}
 
-            <input
-              className="border w-full p-1"
+            <Input
               type="number"
-              autoComplete="off"
-              {...register("age", {
+              register={register("age", {
                 max: 30,
                 min: 20,
               })}
             />
+
             <select className="border w-full p-1" {...register("gender")}>
               <option value="female">female</option>
               <option value="male">male</option>
