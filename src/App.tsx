@@ -1,24 +1,7 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import "./App.css";
-import { useForm, UseFormRegisterReturn } from "react-hook-form";
-interface IInput {
-  type: "text" | "number";
-}
-
-interface Iprops extends IInput {
-  register?: UseFormRegisterReturn;
-}
-
-const Input = forwardRef((props: Iprops, _) => {
-  return (
-    <input
-      className="border w-full p-1"
-      autoComplete="off"
-      type={props.type}
-      {...props.register}
-    />
-  );
-});
+import Input from "./components/Input";
+import { useForm } from "react-hook-form";
 
 const App = () => {
   const {
@@ -42,6 +25,7 @@ const App = () => {
           <div className="flex items-center justify-center flex-col gap-2">
             <Input
               type="text"
+              message={errors.name?.message}
               register={register("name", {
                 required: "아이디는 필수 입력입니다.",
                 pattern: /^[A-Za-z]+$/i,
@@ -49,11 +33,12 @@ const App = () => {
                 minLength: 1,
               })}
             />
-            {errors.name?.message}
 
             <Input
               type="number"
+              message={errors.age?.message}
               register={register("age", {
+                required: "age는 필수 입력입니다.",
                 max: 30,
                 min: 20,
               })}
