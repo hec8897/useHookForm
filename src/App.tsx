@@ -1,13 +1,14 @@
 import React from "react";
 import "./App.css";
 import Input from "./components/Input";
+import Select from "./components/Select";
 import { useForm } from "react-hook-form";
 
 const App = () => {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       name: "dawoon",
@@ -43,12 +44,12 @@ const App = () => {
                 min: 20,
               })}
             />
-
+            <Select register={register("gender")} />
+            {/* 
             <select className="border w-full p-1" {...register("gender")}>
               <option value="female">female</option>
               <option value="male">male</option>
-            </select>
-            {isValid ? "true" : "false"}
+            </select> */}
             <input
               type="submit"
               className="border bg-blue-400 w-full"
